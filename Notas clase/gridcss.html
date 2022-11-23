@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .gridlayout{
+            border: solid 1px;
+            width: 100%;
+            /* Habilita el GRID CSS */
+            display: grid;
+            /* Define número de columnas 
+            grid-template-columns:auto; es 1 columna que ocupa el 100% del espacio
+            grid-template-columns:auto auto; es 2 columnas que cada una ocupa el 50% del espacio 
+            grid-template-columns:20% 50% auto; define el ancho relativo de cada columna*/
+            grid-template-columns: auto;
+            /* misma funcionalidad que las columnas*/
+            grid-template-rows: auto;
+            justify-content: stretch;
+        }
+
+        .c1{
+            /*Define cuántas líneas (desde el borde) abarca el item
+            aumenta el tamaño hoizontal
+            Este ejemplo va desde la línea 1 a la 4*/
+            grid-column: 1/4;
+        }
+
+        .c2{
+            /*Este ejemplo va desde la línea 2 a la 3*/
+            grid-column: 2/3;
+        }
+
+        .c3{
+            /*Este ejemplo va desde la línea 2 a la 3 en filas 
+            o aumenta el tamaño vertical*/
+            grid-row: 2/4;
+        }
+
+    </style>
+
+    <div class="gridlayout">
+        <div class="caja c1">1</div>
+        <div class="caja c2">2</div>
+        <div class="caja c3">3</div>
+        <div class="caja">4</div>
+        <div class="caja">5</div>
+        <div class="caja">6</div>
+        <div class="caja">7</div>
+        <div class="caja">8</div>
+        <div class="caja">9</div>
+        <div class="caja">10</div>
+    </div>
+</body>
+</html>

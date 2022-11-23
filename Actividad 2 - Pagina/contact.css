@@ -1,0 +1,36 @@
+.navbar-custom{
+    background-color: #3D348B !important;
+}
+
+.container{
+    background-color: gray;
+    margin: 0px !important;
+    width: 100%;
+}
+
+.gradient {
+    background: linear-gradient(40deg,#3D348B,#fc6262) !important;
+    border-radius: 20px;
+}
+
+.box{
+    background-color: gray;
+    padding: 0px;
+    margin: 0px;
+}
+
+.card{
+    border-radius: 20px !important;
+}
+
+.space{
+    margin-bottom: 10px;
+}
+
+.btn{
+    background-color: #fc6262;
+}
+
+.footer-custom{
+    background-color: #3D348B;
+}

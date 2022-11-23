@@ -1,0 +1,66 @@
+.navbar-custom{
+    background-color: #3D348B !important;
+}
+
+.container-no-margin {
+    margin:10px !important;
+}
+
+.jumbotron {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),
+    url(./jumbotron.jpeg);
+    background-size: cover;
+    background-position: 50% 80%;
+    height: 400px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+h1{
+    color: #3D348B !important;
+}
+
+.card-custom h5{
+    color: #fc6262 !important;
+}
+
+.card-custom{
+    height: auto;
+}
+
+.icon{
+    color: #3D348B;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.card1-img {
+    height: 300px;
+    object-position: 50% 50%;
+    object-fit: cover;
+}
+
+.card2-img {
+    height: 100%;
+    object-position: 20% 50%;
+    object-fit: cover;
+}
+
+.space{
+    margin-bottom: 10px;
+}
+
+.card-img{
+    background-image: url(./jumbotron.jpeg);
+    background-size: cover;
+    height: auto;
+    width:100%;
+}   
+
+.footer-custom{
+    background-color: #3D348B;
+}
+
+footer p {
+    color: white;
+}

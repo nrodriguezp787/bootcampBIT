@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .box{
+            width: 80%;
+            border: solid 1px;
+            /* Habilita flexbox*/
+            display: flex;
+            flex-direction: row;
+            /*Wrap hace que mantenga el tamaño del item y salten de la fila. 
+            nowrap ajusta el tamaño de los items para que quedan en la fila
+            Ayuda a alinear contenido con cambio resolución */
+            flex-wrap: wrap;
+            /*mueve los items al inicio, centro o fin de la columna o fila */
+            justify-content: center;
+            /*Justify-content: flex-end = fin de la fila/columna
+            Justify-content: flex-start = inicio de la fila/columna
+            justify-content: space-around = distribuye el espacio libre
+            justify-content: space-between = distribuye el espacio entre items */
+        }
+
+        .item{
+            border: solid 1px;
+            width: 50px;
+        }
+
+        .a{
+            /*cambia tamaño relativo del item vs standard (2x, 3x, etc) */
+            flex: 1;
+        }
+
+        .b{
+            /*cambia tamaño relativo del item vs standard (2x) */
+            flex: 2;
+        }
+
+        .c{
+            /*cambia tamaño relativo del item vs standard (3x) */
+            flex: 3;
+        }
+    </style>
+
+    <div class="box">
+        <div class="item a"> a </div>
+        <div class="item b"> b </div>
+        <div class="item c"> c </div>
+        
+    </div>
+</body>
+</html>
