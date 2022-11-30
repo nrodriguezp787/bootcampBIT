@@ -28,5 +28,9 @@ Subir archivos de carpeta en PC a Repositorio nuevo
             git config --global user.name nrodriguezp787
             git config --global user-email n.rodriguezp787@gmail.com
             git init
-Saltar entre ramas
-            git chechout nombre_rama 
+Saltar entre ramas o crear rama y saltar a esa rama de una vez
+            git chechout -b nombre_rama 
+
+Subir cambios a carpeta existente en repositorio Github
+            
+
