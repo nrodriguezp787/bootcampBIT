@@ -35,4 +35,7 @@ Subir cambios a carpeta existente en repositorio Github
             git add .
             git commit -m "mensaje de subida"
             git push origin main
+            Ir a github y aprobar solicitud de merge
+            git pull origin main 
+                para que la carpeta del computador quede actualizada con lo que hay en git
 
