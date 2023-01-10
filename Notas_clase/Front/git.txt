@@ -1,0 +1,38 @@
+Inicializar
+    - Crear una nueva carpeta
+    git init
+
+
+Comandos Remote:
+    - Crear
+    git remote add [nombre][url]
+    - Modificar 
+    git remote rename [anterior_nombre][nuevo_nombre]
+    - Eliminar
+    git remote rm [nombre]
+
+Otros comandos:
+    - agregar archivos a un proyecto
+    git add [nombre]
+    - guardar los los cambios en los archivos modificados
+    git commit -m
+    - subir los cambios al repositorio
+    git push [nombre_repositorio][nombre_rama]
+
+    ------- Flujo para subir cambios:-----
+            git add .
+            git commit -m 
+            git push origin nombre_rama
+
+Subir archivos de carpeta en PC a Repositorio nuevo
+            git config --global user.name nrodriguezp787
+            git config --global user-email n.rodriguezp787@gmail.com
+            git init
+Saltar entre ramas o crear rama y saltar a esa rama de una vez
+            git chechout nombre_rama 
+
+Subir cambios a carpeta existente en repositorio Github
+            git add .
+            git commit -m "mensaje de subida"
+            git push origin main
+
