@@ -42,7 +42,9 @@
                         <h3 class="text-white mb-3 pt-3 font-weight-bold">Aplica con tu producto</h3>
                     </div>
                 </div>
-                <div class="card-body mx-4 mt-4">
+                <div id="confirm">
+                </div>
+                <div class="card-body mx-4 mt-0">
                     <div class="md-form">
                         <label for="Form-email3" class="">Nombre</label>
                         <input type="text" id="Form-name3" class="form-control" placeholder="Nombre completo">
@@ -55,12 +57,12 @@
 
                     <div class="md-form">
                         <label for="Form-email3" class="">Tu producto</label>
-                        <input type="text" id="Form-name3" class="form-control" placeholder="Marca y nombre de tu producto">
+                        <input type="text" id="Form-prod3" class="form-control" placeholder="Marca y nombre de tu producto">
                     </div>
 
                     <div class="md-form">
                         <label for="Form-email3" class="">Describe tu producto</label>
-                        <textarea type="text" id="message6" name="message6" rows="2" class="form-control md-textarea" placeholder="Sé muy específico por favor"></textarea> 
+                        <textarea type="text" id="Form-descri3" name="message6" rows="2" class="form-control md-textarea" placeholder="Sé muy específico por favor"></textarea> 
                         <div class="form-group">
                         </div>
                     </div>
@@ -77,7 +79,7 @@
                     <div class="row align-self-center space">
                         <div class="align-self-center">
                             <div class="text-center">
-                                <button type="button" class="btn btn-rounded z-depth-1a waves-effect waves-light">Enviar aplicación</button>
+                                <button type="button" class="btn btn-rounded z-depth-1a waves-effect waves-light" onclick="almacenar()">Enviar aplicación</button>
                             </div>
                         </div>
                      </div>
@@ -85,6 +87,7 @@
         </section>
     </div>
     </div>
+    <script src="./contact.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
