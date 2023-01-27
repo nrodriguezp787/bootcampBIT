@@ -33,6 +33,8 @@ Saltar entre ramas o crear rama y saltar a esa rama de una vez
 
 Subir cambios a carpeta existente en repositorio Github
             git add .
+                    Si hay error, intentar este comando:
+                        $ rm -f ./.git/index.lock
             git commit -m "mensaje de subida"
             git push origin main
             Ir a github y aprobar solicitud de merge
