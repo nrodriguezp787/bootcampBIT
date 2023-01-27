@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function guardar(){
+
+            var cedula = document.getElementById("cedula").value
+            var age = document.getElementById("age").value
+            var name = document.getElementById("name").value
+
+
+            // Código generado por POSTMAN al parametrizar un POST
+            // Hay que cambiarlo para que no tenga error de CORS (Seguridad)
+                //Para solicionar, parametrizar headers y CORS en index.js
+                var data = "name="+name+"&cedula="+cedula+"&age="+age;
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function() {
+                if(this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+                });
+
+                xhr.open("POST", "http://localhost:3000/cliente/Guardar"); //Endpoint
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.send(data);
+        }
+    </script>
+
+    <input type="text" id="cedula" placeholder="cedula">
+    <input type="text" id="name" placeholder="name">
+    <input type="text" id="age" placeholder="age">
+
+    <div onclick="guardar()">Guardar</div>
+
+</body>
+</html>

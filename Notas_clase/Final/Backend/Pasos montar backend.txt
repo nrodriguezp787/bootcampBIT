@@ -1,0 +1,325 @@
+Truco: para cambiar muchos datos al tiempo usar ctrl+d
+
+/// Instalar NPM y los paquetes básicos /////    
+    
+    1. Con CMD ubicarse en carpeta donde van a estar los archivos del backend
+        a. Crear paquete con los datos que quiera
+            comando: npm init
+        b. Al terminar ese proceso, se debió crear en la carpeta un archivo .json con la parametrización
+
+    2. Con CMD instalar el paquete de express
+        comando: npm i express --save
+
+    3. Con CMD instalar el paquete de body parser para manejar requests POST con los datos en body
+        comando: npm i body-parser --save
+
+    4. Con CMD instalar el paquete cors para control de accesos a las APIs
+        comando: npm i cors --save
+
+    5. Con CMD instalar el paquete mongoose para controlar bases de datos mongo
+        comando: npm i mongoose --save
+
+    6. Con CMD instalar el paquete sha256 para encriptar info de usuarios
+        comando: npm i sha256 --save
+
+/// Montar servidor /////
+
+    1. Crear el archivo .js básico de nuestra app
+        OJO: el nombre ebe coincidir con el "main" del archivo package.json creado al iniciar NPM
+        Ejemplo: index.js o app.js
+
+    2. Crear archivo config.js donde se guardaran las configuraciones globales
+        a. Establecer el puerto a usar dentro del objeto config
+            comando:    var config = {}
+                        config.puerto = 3000;
+                        module.exports.config = config
+        b. Vincular archivo config.js al archivo app.js
+            comando: global.config = require(__dirname + '/config.js').config
+                Usar comando en app.js
+
+    3. Usar Express para montar servidor
+        comando:    var express = require('express')
+                    global.app = express()
+                    app.listen(config.puerto,function(){
+                        console.log('Servidor conectado, puerto' + config.puerto)
+                    })
+
+    4. En CMD correr archivo creado en paso 1
+        comando: node app.js 
+
+
+//// Habilitar APIs y seguridad de APIs//////
+    1. Correr código e habilitación en app.js
+        comando:
+            app.all('*',function(request,response,next){
+                var whitelist = request.headers.origin;
+
+                response.header('Access-Control-Allow-Origin', whitelist)
+                response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD');
+                response.header('Access-Control-Allow-Headers', " authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+                response.header("Access-Control-Allow-Credentials", "true");
+
+                next()
+             })
+
+    2. Crear whitelist en config de direcciones que pueden consumir las APIs
+        comando en config.js:
+            config.listablanca = [
+                'http://127.0.0.1:5000'           
+            ]
+
+    3. Implementar CORS 
+        comando en app.js:
+            var cors = require('cors')
+            app.use(cors({
+                origin:function(origin,callback){
+                    console.log(origin)
+                    if(origin) return callback(null,true)
+
+                    if(config.listablanca.indexOf(origin) === -1){
+                        return callback('error CORS',false)
+                    }
+
+                    return callback(null,true)
+                }
+            }))
+
+/// Crear CRUD con modelo vista controlador (MVC)
+    1. Crear estructura de MVC
+        A. archivo routes.js
+            a. Crear console.log con un mensaje en routes.js para poder testear conexión
+                comando en routes.js:
+                    console.log('routes')
+            b. Conectar a app.js
+                comando en app.js:
+                    require(__dirname + '/routes.js')
+            c. Testear conexión
+                Tumbar servidor y volver a iniciar
+                    comando en CMD: 
+                        ctrl + c (2 VECES)
+                        node app.js
+        
+        B. Crear carpetas de controladores y modelos
+            a. Crear carpeta api 
+            b. Dentro de carpeta api, crear carpetas: controladores y modelos
+
+    2. Crear extructura de APIs 
+        A. Conectar routes a controladores 
+            comando en routes: 
+                var usuariosController = require(__dirname + '/api/controladores/usuariosController.js').usuarios
+        B. Crear ruta para cada API
+            comando en routes.js:
+                app.post("/Usuarios/Guardar",function(request,response){
+                    usuariosController.Guardar(request,response)
+                })
+                app.post("/Usuarios/CargarTodas",function(request,response){
+                    usuariosController.CargarTodas(request,response)
+                })
+                app.post("/Usuarios/CargarId",function(request,response){
+                    usuariosController.CargarId(request,response)
+                })
+                app.post("/Usuarios/ActualizarId",function(request,response){
+                    usuariosController.ActualizarId(request,response)
+                })
+                app.post("/Usuarios/Eliminar",function(request,response){
+                    usuariosController.Eliminar(request,response)
+                })
+        C. Crear archivo .js de controlador 
+            a. En carpeta controladores
+            b. Debe llamarse igual a como lo vinculé en routes
+                Ejemplo: usariosController.js
+        D. Permitir que controller sea leído por otros archivos 
+                comando en usuariosController.js:
+                    var usuariosController = {}
+                    module.exports.usuarios = usuariosController
+        E. Crear los controladores para cada API
+            comando en usuariosController.js:
+                usuariosController.Guardar = function(request,response){
+                }
+                usuariosController.CargarTodas = function(request,response){
+                }
+                usuariosController.CargarId = function(request,response){
+                }
+                usuariosController.ActualizarId = function(request,response){
+                }
+                usuariosController.Eliminar = function(request,response){
+                }
+        F. Probar conexión a servidor para comprobar que vamos bien
+            a. Tumbar servidor (ctrl + c 2 veces)
+            b. volver a cargar  (node app.js)
+        G. Vincular los controladores a los modelos
+            comando en usuariosController.js:
+                var modelUsuarios = require(__dirname + '/../modelos/modelUsuarios.js').usuarios
+        H. Crear archivo .js de modelos
+            a. En carpeta modelos
+            b. Debe llamarse igual a como lo vinculé en usariosController
+                Ejemplo: modelController.js
+        I. Permitir que model sea leído por otros archivos 
+                comando en modelUsuarios.js:
+                    var ModelUsuarios = {}
+                    module.exports.usuarios = ModelUsuarios
+        J. Crear modelos para cada API:
+            comando en modelUsuarios.js:
+                ModelUsuarios.Guardar = function(post,callback){
+
+                }
+                ModelUsuarios.CargarTodas = function(post,callback){
+                    
+                }
+                ModelUsuarios.CargarId = function(post,callback){
+                    
+                }
+                ModelUsuarios.ActualizarId = function(post,callback){
+                    
+                }
+                ModelUsuarios.Eliminar = function(post,callback){
+                    
+                }
+        K. Tumbar servidor y volver a cargar para revisar que vamos bien
+
+    3. Poblar APIs en controller
+        A. Cargar body parser a app.js 
+            comando en app.js  
+                var bodParse = require('body-parser')
+                app.use(bodyParser.json())
+                app.use(bodParse.urlencoded({extended:true}))
+        B. Crear validaciones de obligatorios datos en controladores
+            comando en usuariosController.js:
+                if(post.codigo == undefined || post.codigo == null || post.codigo == ""){
+                    response.json({state:false, mensaje:"el campo codigo es obligatorio"})
+                    return false
+                }
+                if(post.nombre == undefined || post.nombre == null || post.nombre == ""){
+                    response.json({state:false, mensaje:"el campo nombre es obligatorio"})
+                    return false
+                }
+        C. Invocar al ModelUsuarios para conectarlo
+            a. comando en usuariosController dentro del API guardar: 
+                    ModelUsuarios.Guardar(post,function(respuesta){
+                        if(respuesta.state == true){
+                            response.jason({state:true,mensaje:"Se guardó correctamente"})
+                        }
+                        else{
+                            response.json({state:false,mensaje:"Se presentó un error al guardar. Por favor inténtalo de nuevo"})
+                        }
+                    })
+            b. comando en usuariosController dentro del API cargartodas:
+                    ModelUsuarios.CargarTodas(null,function(respuesta){
+                        response.json(respuesta)
+                    })
+            c. comando en usuariosController dentro del API cargartodas:
+                    ModelUsuarios.CargarId(post,function(respuesta){
+                        response.json(respuesta)
+                    })
+            
+            d. comando en usuariosController dentro del API actualizarID:
+                    ModelUsuarios.ActualizarId(post,function(respuesta){
+                        if(respuesta.state == true){
+                            response.json({state:true,mensaje:"Se actualizó correctamente el elemento"})
+                        }
+                        else{
+                            response.json({state:false,mensaje:"Se presentó un error al actualizar. Por favor inténtalo de nuevo"})
+                        }
+                    })
+            e. comando en usuariosController dentro del API Eliminar:
+                        ModelUsuarios.Eliminar(post,function(respuesta){
+                            if(respuesta.state == true){
+                                response.json({state:true,mensaje:"Se eliminó correctamente el elemento"})
+                            }
+                            else{
+                                response.json({state:false,mensaje:"Se presentó un error eliminando el elemento. Por favor inténtalo de nuevo"})
+                            }
+                        })
+            
+    4. Conectar a MongoDB para crear tabla maestra
+        A. Crear conexión con Mongoose en app.js
+            comando en app.js:
+                    mongoose.connect('mongodb://127.0.0.1:27017/' + config.bd, {useNewUrlParser:true,useUnifiedTopology:true},(error,response) => {
+                        if(error){
+                            console.log(error)
+                        }
+                        else{
+                        console.log('conexion a mongo correcta')
+                        }
+                    })
+        B. Crear la configuración del nombre de la base de datos:
+            comando en config.js:
+                    config.bd = "Nombre de BD"
+        C. Conectar Mongoose a app.js:
+            comando en app.js:
+                    const mongoose = require('mongoose')
+
+    5. Poblar APIs en ModelUsuarios
+        A. Conectar mongoose a ModelUsuarios
+            comando en modelUsuarios:
+                    const mongoose = require('mongoose')
+        B. Crear Schema y modelo de datos
+            comando en modelUsuarios:
+                    const Schema = mongoose.Schema;
+                    var UsuariosSchema = new Schema({
+                        codigo:String,
+                        nombre:String
+                    })
+                    const Mymodel = mongoose.model('Usuarios',UsuariosSchema)
+        C. Crear instancia de MyModel para guardar info
+            a. comando en ModelUsuarios dentro del API guardar:
+                    const instancia = new Mymodel
+                    instancia.codigo = post.codigo
+                    instancia.nombre = post.nombre
+                    instancia.save((error, Creado) => {
+                        if(error){
+                            return callback({state:false, data:error})
+                        }
+                        else{
+                            return callback({state:true})
+                        }
+                    })
+            b. comando en ModelUsuarios dentro del API cargartodas:
+                    Mymodel.find({},{},(error,documentos) => {
+                        if(error){
+                            return callback({state:false, data:error})
+                        }
+                        else{
+                            return callback({state:true, data:documentos})
+                        }
+                    })
+            c. comando en ModelUsuarios dentro del API cargarID:
+                    Mymodel.findById(post.id,{},(error,documentos) => {
+                        if(error){
+                            return callback({state:false, data:error})
+                        }
+                        else{
+                            return callback({state:true, data:documentos})
+                        }
+                    })
+            d. comando en ModelUsuarios dentro del API ActualizarId:
+                    Mymodel.findByIdAndUpdate(post.id,{
+                        codigo:post.codigo,
+                        nombre:post.nombre
+                    },(error,Modificado) => {
+                        if(error){
+                            return callback({state:false, data:error})
+                        }
+                        else{
+                            return callback({state:true})
+                        }
+                    })
+            e. comando en ModelUsuarios dentro del API Eliminar:
+                    Mymodel.findByIdAndDelete(post.id,(error,Eliminado) => {
+                        if(error){
+                            return callback({state:false, data:error})
+                        }
+                        else{
+                            return callback({state:true})
+                        }
+                    })
+        D. Probar conexión a servidor y a mongo para confirmar que todo va bien
+            comando en CMD:
+                ctrl + c (2 veces)
+                node app.js
+
+        E. Probar APIs con Postman
+            
+
+        
+
